@@ -1,0 +1,26 @@
+positions 3 {
+	0 0 0
+	1 0 0
+	0 1 0
+}
+normals 3 {
+	-1 -1 1
+	1 -1 1
+	0 1 1
+}
+skinweights 3 {
+	1 0 1
+	1 0 1
+	1 0 1
+}
+triangles 1 {
+	0 1 2
+}
+bindings 1 {
+	matrix {
+		1 0 0
+		0 1 0
+		0 0 1
+		0 0 0
+	}
+}
