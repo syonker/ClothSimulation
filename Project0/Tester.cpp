@@ -66,17 +66,7 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 	Cam=new Camera;
 	Cam->SetAspect(float(WinX)/float(WinY));
 
-	//Prep Rig
-	currRig = new Rig();
-	currRig->Load("../skeletons/wasp2.skel", "../skins/wasp2.skin");
-
-	drawSkel = true;
-	drawSkin = true;
-
-	currAnimation = new Animation();
-	currAnimation->Load("../animations/wasp2_walk.anim");
-
-	currPlayer = new Player(currAnimation, currRig->skeleton);
+	
 
 }
 
@@ -85,7 +75,6 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 Tester::~Tester() {
 	delete Program;
 	delete Cam;
-	delete currRig;
 
 	glFinish();
 	glutDestroyWindow(WindowHandle);
@@ -97,9 +86,7 @@ void Tester::Update() {
 	// Update the components in the world
 	Cam->Update();
 
-	currPlayer->Evaluate();
 
-	currRig->Update(currPlayer->rootTranslate);
 
 	// Tell glut to re-display the scene
 	glutSetWindow(WindowHandle);
@@ -120,7 +107,6 @@ void Tester::Draw() {
 	glViewport(0, 0, WinX, WinY);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	currRig->Draw(Cam->GetViewProjectMtx(), Program->GetProgramID(), drawSkel, drawSkin);
 
 	// Finish drawing scene
 	glFinish();
@@ -152,34 +138,6 @@ void Tester::Keyboard(int key,int x,int y) {
 			break;
 		case 'r':
 			Reset();
-			break;
-		case '1':
-			if (drawSkel) {
-				drawSkel = false;
-			}
-			else {
-				drawSkel = true;
-			}
-			break;
-		case '2':
-			if (drawSkin) {
-				drawSkin = false;
-			}
-			else {
-				drawSkin = true;
-			}
-			break;
-		case 'd':
-			currRig->skeleton->upSelection();
-			break;
-		case 'a':
-			currRig->skeleton->downSelection();
-			break;
-		case 'w':
-			currRig->skeleton->incDOF();
-			break;
-		case 's':
-			currRig->skeleton->decDOF();
 			break;
 	}
 }
