@@ -1,7 +1,7 @@
 
 #include "Particle.h"
 
-Particle::Particle(float x, float y, float z) {
+Particle::Particle(float x, float y, float z, unsigned int place) {
 
 	Position = { x,y,z };
 	ogPosition = { x,y,z };
@@ -16,6 +16,8 @@ Particle::Particle(float x, float y, float z) {
 	model->MakeBox(Position - offset, Position + offset);
 
 	fixed = false;
+
+	index = place;
 
 
 }

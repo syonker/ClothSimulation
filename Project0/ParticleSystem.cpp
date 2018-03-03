@@ -4,7 +4,7 @@
 
 ParticleSystem::ParticleSystem()
 {
-	particleView = true;
+	particleView = false;
 }
 
 
@@ -22,14 +22,14 @@ void ParticleSystem::InitializeCloth(unsigned int size, float xOffset, float yOf
 			//fix row
 			if (j == size-1) {
 
-				Particle* newP = new Particle(i + xOffset, j + yOffset, 0);
+				Particle* newP = new Particle(i + xOffset, j + yOffset, 0, Particles.size());
 				newP->fixed = true;
 				Particles.push_back(newP);
 
 			}
 			else {
 
-				Particle* newP = new Particle(i + xOffset, j + yOffset, 0);
+				Particle* newP = new Particle(i + xOffset, j + yOffset, 0, Particles.size());
 				Particles.push_back(newP);
 
 			}
@@ -100,9 +100,27 @@ void ParticleSystem::InitializeCloth(unsigned int size, float xOffset, float yOf
 	Particles[0]->ogPosition = Particles[0]->Position;
 
 	//compute normals
-	SetParticleNormals();
+	UpdateNormals();
 
-	//BindShader();
+	//fill the shader arrays to the correct size
+	for (int i = 0; i < NumParticles; i++) {
+		shaderVerts.push_back(0);
+		shaderVerts.push_back(0);
+		shaderVerts.push_back(0);
+		shaderNormals.push_back(0);
+		shaderNormals.push_back(0);
+		shaderNormals.push_back(0);
+	}
+	for (int i = 0; i < Triangles.size(); i++) {
+
+		shaderIndices.push_back(Triangles[i]->P1->index);
+		shaderIndices.push_back(Triangles[i]->P2->index);
+		shaderIndices.push_back(Triangles[i]->P3->index);
+
+	}
+
+	UpdateShaderArrays();
+	BindShader();
 
 }
 
@@ -132,10 +150,28 @@ void ParticleSystem::Update(float deltaTime) {
 
 	}
 
-	//Need to update shader arrays
+	UpdateShaderArrays();
+
+}
+
+
+void ParticleSystem::UpdateShaderArrays() {
+
+
+	for (int i = 0; i < NumParticles; i++) {
+
+		shaderVerts[(3 * i)] = Particles[i]->Position.x;
+		shaderVerts[(3 * i) + 1] = Particles[i]->Position.y;
+		shaderVerts[(3 * i) + 2] = Particles[i]->Position.z;
+
+		shaderNormals[(3 * i)] = Particles[i]->Normal.x;
+		shaderNormals[(3 * i) + 1] = Particles[i]->Normal.y;
+		shaderNormals[(3 * i) + 2] = Particles[i]->Normal.z;
+	}
 
 
 }
+
 
 void ParticleSystem::Draw(const glm::mat4 &viewProjMtx, uint shader) {
 
@@ -153,6 +189,8 @@ void ParticleSystem::Draw(const glm::mat4 &viewProjMtx, uint shader) {
 		//send things to shader
 		// Set up shader
 		glUseProgram(shader);
+
+		glDisable(GL_CULL_FACE);
 
 		glm::mat4 modelMtx = glm::mat4(1.0f);
 
@@ -200,7 +238,7 @@ void ParticleSystem::ResetParticles() {
 
 }
 
-void ParticleSystem::SetParticleNormals() {
+void ParticleSystem::UpdateNormals() {
 
 	for (int i = 0; i < Triangles.size(); i++) {
 

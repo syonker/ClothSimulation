@@ -49,7 +49,6 @@ private:
 	Camera *Cam;
 
 	Player* player;
-	Particle* testP;
 	ParticleSystem* cloth;
 
 	bool drawSkel;

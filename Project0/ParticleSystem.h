@@ -17,8 +17,9 @@ public:
 	void Update(float deltaTime);
 	void Draw(const glm::mat4 &viewProjMtx, uint shader);
 	void ResetParticles();
-	void SetParticleNormals();
+	void UpdateNormals();
 	void BindShader();
+	void UpdateShaderArrays();
 
 	unsigned int NumParticles;
 	std::vector<Particle*> Particles;

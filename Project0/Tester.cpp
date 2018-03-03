@@ -66,8 +66,6 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 	Cam=new Camera;
 	Cam->SetAspect(float(WinX)/float(WinY));
 
-	testP = new Particle(0, 0, 0);
-
 	cloth = new ParticleSystem();
 	cloth->InitializeCloth(20, -10.0f, 5.0f);
 	//cloth->InitializeCloth(3, -1.5f, 0.0f);

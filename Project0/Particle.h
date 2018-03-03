@@ -7,7 +7,7 @@ class Particle {
 
 public:
 
-	Particle(float x, float y, float z);
+	Particle(float x, float y, float z, unsigned int place);
 	~Particle();
 
 	void Update(float deltaTime);
@@ -24,6 +24,7 @@ public:
 	glm::vec3 ogPosition;
 	glm::vec3 offset;
 	bool fixed;
+	unsigned int index;
 
 private:
 
