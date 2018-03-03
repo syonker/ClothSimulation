@@ -69,9 +69,9 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 	testP = new Particle(0, 0, 0);
 
 	cloth = new ParticleSystem();
-	cloth->InitializeCloth(10);
+	cloth->InitializeCloth(10, -5.0f, 5.0f);
 
-	player = new Player(cloth, 0, 0.0001, 100);
+	player = new Player(cloth, 0.0f, 0.01f, 100.0f);
 	
 
 }

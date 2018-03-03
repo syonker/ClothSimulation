@@ -10,7 +10,7 @@ public:
 	ParticleSystem();
 	~ParticleSystem();
 
-	void InitializeCloth(unsigned int size);
+	void InitializeCloth(unsigned int size, float xOffset, float yOffset);
 	void Update(float deltaTime);
 	void Draw(const glm::mat4 &viewProjMtx, uint shader);
 	void ResetParticles();

@@ -27,7 +27,7 @@ void Player::Update() {
 
 	if (active) {
 
-		while (time < tEnd) {
+		if (time < tEnd) {
 
 			System->Update(increment);
 			time += increment;

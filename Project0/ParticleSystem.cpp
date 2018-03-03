@@ -13,13 +13,13 @@ ParticleSystem::~ParticleSystem()
 
 }
 
-void ParticleSystem::InitializeCloth(unsigned int size) {
+void ParticleSystem::InitializeCloth(unsigned int size, float xOffset, float yOffset) {
 
 	for (int i = 0; i < size; i++) {
 
 		for (int j = 0; j < size; j++) {
 
-			Particle* newP = new Particle(i - 5,j + 20,0);
+			Particle* newP = new Particle(i + xOffset,j + yOffset,0);
 			Particles.push_back(newP);
 
 		}
