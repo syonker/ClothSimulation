@@ -28,6 +28,24 @@ void ParticleSystem::InitializeCloth(unsigned int size, float xOffset, float yOf
 
 	NumParticles = size * size;
 
+
+	//build triangles
+	for (int i = 0; i < NumParticles - size; i++) {
+
+		if (((i+1) % size) != 0) {
+
+			Triangle* newT = new Triangle(Particles[i], Particles[i+1], Particles[i+size]);
+			Triangles.push_back(newT);
+
+			Triangle* newT = new Triangle(Particles[i + 1], Particles[i + size], Particles[i + size + 1]);
+			Triangles.push_back(newT);
+
+		}
+
+	}
+
+	//std::cerr << "NumT: " << Triangles.size() << std::endl;
+
 }
 
 void ParticleSystem::Update(float deltaTime) {

@@ -10,6 +10,7 @@
 #include "Particle.h"
 #include "ParticleSystem.h"
 #include "Player.h"
+#include "SpringDamper.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 

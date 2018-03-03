@@ -2,6 +2,8 @@
 
 #include "Core.h"
 #include "Particle.h"
+#include "Triangle.h"
+#include <iostream>
 
 class ParticleSystem
 {
@@ -17,6 +19,7 @@ public:
 
 	unsigned int NumParticles;
 	std::vector<Particle*> Particles;
+	std::vector<Triangle*> Triangles;
 
 private:
 
