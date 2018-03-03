@@ -19,8 +19,20 @@ void ParticleSystem::InitializeCloth(unsigned int size, float xOffset, float yOf
 
 		for (int j = 0; j < size; j++) {
 
-			Particle* newP = new Particle(i + xOffset,j + yOffset,0);
-			Particles.push_back(newP);
+			//little offset to keep it from staying flat
+			if (i == 0 && j == 0) {
+
+				Particle* newP = new Particle(i + xOffset, j + yOffset, 0.01);
+				Particles.push_back(newP);
+
+			}
+			else {
+
+				Particle* newP = new Particle(i + xOffset, j + yOffset, 0);
+				Particles.push_back(newP);
+
+			}
+
 
 		}
 
@@ -29,22 +41,59 @@ void ParticleSystem::InitializeCloth(unsigned int size, float xOffset, float yOf
 	NumParticles = size * size;
 
 
-	//build triangles
-	for (int i = 0; i < NumParticles - size; i++) {
+	//build triangles and springdampers
+	for (int i = 0; i < NumParticles-1; i++) {
 
-		if (((i+1) % size) != 0) {
+		//everything but bottom edge of cloth
+		if (i < NumParticles - size) {
 
-			Triangle* newT = new Triangle(Particles[i], Particles[i+1], Particles[i+size]);
-			Triangles.push_back(newT);
+			//anywhere but right edge of cloth
+			if (((i + 1) % size) != 0) {
 
-			Triangle* newT = new Triangle(Particles[i + 1], Particles[i + size], Particles[i + size + 1]);
-			Triangles.push_back(newT);
+				Triangle* newT1 = new Triangle(Particles[i], Particles[i + 1], Particles[i + size]);
+				Triangles.push_back(newT1);
+
+				//all edges
+				SpringDamper* newSD1 = new SpringDamper(Particles[i], Particles[i + 1]);
+				SpringDampers.push_back(newSD1);
+				SpringDamper* newSD2 = new SpringDamper(Particles[i + 1], Particles[i + size]);
+				SpringDampers.push_back(newSD2);
+				SpringDamper* newSD3 = new SpringDamper(Particles[i], Particles[i + size]);
+				SpringDampers.push_back(newSD3);
+
+				//other diagonal
+				SpringDamper* newSD4 = new SpringDamper(Particles[i], Particles[i + size + 1]);
+				SpringDampers.push_back(newSD4);
+
+				//above technique will get all but bottom and right borders
+
+				Triangle* newT2 = new Triangle(Particles[i + 1], Particles[i + size], Particles[i + size + 1]);
+				Triangles.push_back(newT2);
+
+
+			}
+			else {
+
+				//will account for right edge
+				SpringDamper* newSD5 = new SpringDamper(Particles[i], Particles[i + size]);
+				SpringDampers.push_back(newSD5);
+
+
+			}
+
+		}
+		//for the bottom edge
+		else {
+
+			SpringDamper* newSD6 = new SpringDamper(Particles[i], Particles[i + 1]);
+			SpringDampers.push_back(newSD6);
+
 
 		}
 
 	}
 
-	//std::cerr << "NumT: " << Triangles.size() << std::endl;
+	std::cerr << "NumSD: " << SpringDampers.size() << std::endl;
 
 }
 
@@ -60,6 +109,11 @@ void ParticleSystem::Update(float deltaTime) {
 		force = gravity * Particles[i]->Mass;
 		Particles[i]->ApplyForce(force);
 
+	}
+
+	for (int i = 0; i < SpringDampers.size(); i++) {
+
+		SpringDampers[i]->ComputeForce();
 	}
 
 	//Integrate for position

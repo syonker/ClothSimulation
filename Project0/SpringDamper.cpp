@@ -6,6 +6,9 @@ SpringDamper::SpringDamper(Particle* p1, Particle* p2)
 {
 	P1 = p1;
 	P2 = p2;
+
+	L0 = glm::distance(P2->Position, P1->Position);
+
 }
 
 

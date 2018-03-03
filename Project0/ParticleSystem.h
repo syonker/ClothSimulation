@@ -4,6 +4,7 @@
 #include "Particle.h"
 #include "Triangle.h"
 #include <iostream>
+#include "SpringDamper.h"
 
 class ParticleSystem
 {
@@ -20,6 +21,7 @@ public:
 	unsigned int NumParticles;
 	std::vector<Particle*> Particles;
 	std::vector<Triangle*> Triangles;
+	std::vector<SpringDamper*> SpringDampers;
 
 private:
 

@@ -14,9 +14,9 @@ public:
 	void ComputeForce();
 
 	//Spring Constant
-	float Ks;
+	float Ks = 100.0f;
 	//Damping Factor
-	float Kd;
+	float Kd = 300.0f;
 	//Rest Length
 	float L0;
 
