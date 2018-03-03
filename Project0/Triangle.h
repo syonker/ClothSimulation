@@ -12,6 +12,7 @@ public:
 	~Triangle();
 
 	void UpdateNormal();
+	void AerodynamicForce();
 
 	Particle* P1;
 	Particle* P2;

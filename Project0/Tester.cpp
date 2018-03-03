@@ -153,6 +153,9 @@ void Tester::Keyboard(int key,int x,int y) {
 		case 'p':
 			player->SetActive(false);
 			break;
+		case 's':
+			cloth->ToggleParticleView();
+			break;
 	}
 }
 

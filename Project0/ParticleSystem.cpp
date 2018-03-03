@@ -130,6 +130,7 @@ void ParticleSystem::Update(float deltaTime) {
 	glm::vec3 gravity = {0.0f, -9.8f, 0.0f};
 	glm::vec3 force;
 
+
 	for (int i = 0; i < NumParticles; i++) {
 		
 		//f = mg
@@ -143,6 +144,11 @@ void ParticleSystem::Update(float deltaTime) {
 		SpringDampers[i]->ComputeForce();
 	}
 
+	for (int i = 0; i < Triangles.size(); i++) {
+
+		Triangles[i]->AerodynamicForce();
+	}
+
 	//Integrate for position
 	for (int i = 0; i < NumParticles; i++) {
 
@@ -150,6 +156,7 @@ void ParticleSystem::Update(float deltaTime) {
 
 	}
 
+	UpdateNormals();
 	UpdateShaderArrays();
 
 }
@@ -317,5 +324,16 @@ void ParticleSystem::BindShader() {
 	// Unbind the VAO now so we don't accidentally tamper with it.
 	// NOTE: You must NEVER unbind the element array buffer associated with a VAO!
 	glBindVertexArray(0);
+
+}
+
+void ParticleSystem::ToggleParticleView() {
+
+	if (particleView) {
+		particleView = false;
+	}
+	else {
+		particleView = true;
+	}
 
 }

@@ -20,6 +20,7 @@ public:
 	void UpdateNormals();
 	void BindShader();
 	void UpdateShaderArrays();
+	void ToggleParticleView();
 
 	unsigned int NumParticles;
 	std::vector<Particle*> Particles;
