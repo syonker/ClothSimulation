@@ -22,7 +22,14 @@ void ParticleSystem::InitializeCloth(unsigned int size, float xOffset, float yOf
 			//little offset to keep it from staying flat
 			if (i == 0 && j == 0) {
 
-				Particle* newP = new Particle(i + xOffset, j + yOffset, 0.01);
+				Particle* newP = new Particle(i + xOffset, j + yOffset, 1.0f);
+				Particles.push_back(newP);
+
+			}
+			else if (i == size-1 && j == size-1) {
+
+				Particle* newP = new Particle(i + xOffset, j + yOffset, 1.0f);
+				newP->fixed = true;
 				Particles.push_back(newP);
 
 			}

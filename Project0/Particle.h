@@ -22,6 +22,7 @@ public:
 	glm::vec3 Force;
 	glm::vec3 ogPosition;
 	glm::vec3 offset;
+	bool fixed;
 
 private:
 

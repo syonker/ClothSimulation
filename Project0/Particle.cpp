@@ -13,6 +13,8 @@ Particle::Particle(float x, float y, float z) {
 	offset = {0.1f,0.1f,0.1f};
 	model->MakeBox(Position - offset, Position + offset);
 
+	fixed = false;
+
 
 }
 
@@ -23,20 +25,33 @@ Particle::~Particle() {
 
 void Particle::Update(float deltaTime) {
 
-	//Compute Acceleration
-	glm::vec3 acc = (1.0f / Mass) * Force;
+	if (!fixed) {
 
-	//Compute new position and velocity
-	Velocity += acc * deltaTime;
-	Position += Velocity * deltaTime;
+		//Compute Acceleration
+		glm::vec3 acc = (1.0f / Mass) * Force;
 
-	//Use position to update models position
-	model->MakeBox(Position - offset, Position + offset);
-
-	//Zero out force vector
-	Force = {0.0f,0.0f,0.0f};
+		//Compute new position and velocity
+		Velocity += acc * deltaTime;
+		Position += Velocity * deltaTime;
 
 
+		//Cheezy collision
+		if (Position.y < 0.0f) {
+
+			Position.y = 2.0f*0.0f - Position.y;
+			Velocity.y = -0.5f*Velocity.y;
+			Velocity.x = (1 - 0.1f)*Velocity.x;
+			Velocity.z = (1 - 0.1f)*Velocity.z;
+		}
+
+
+		//Use position to update models position
+		model->MakeBox(Position - offset, Position + offset);
+
+		//Zero out force vector
+		Force = { 0.0f,0.0f,0.0f };
+
+	}
 
 }
 
