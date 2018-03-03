@@ -9,6 +9,9 @@ SpringDamper::SpringDamper(Particle* p1, Particle* p2)
 
 	L0 = glm::distance(P2->Position, P1->Position);
 
+	Ks = 300.0f;
+	Kd = 10.0f;
+
 }
 
 
@@ -27,7 +30,9 @@ void SpringDamper::ComputeForce() {
 	float V1 = glm::dot(E, P1->Velocity);
 	float V2 = glm::dot(E, P2->Velocity);
 
-	float force = -Ks * (L0 - L) - Kd * (V1 - V2);
+	float force = (-Ks * (L0 - L)) - (Kd * (V1 - V2));
+
+	//std::cerr << "Force: " << force << std::endl;
 
 	P1->ApplyForce(force*E);
 	P2->ApplyForce(-force*E);

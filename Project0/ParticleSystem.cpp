@@ -19,16 +19,10 @@ void ParticleSystem::InitializeCloth(unsigned int size, float xOffset, float yOf
 
 		for (int j = 0; j < size; j++) {
 
-			//little offset to keep it from staying flat
-			if (i == 0 && j == 0) {
+			
+			if (i == size-1 && j == size-1) {
 
-				Particle* newP = new Particle(i + xOffset, j + yOffset, 1.0f);
-				Particles.push_back(newP);
-
-			}
-			else if (i == size-1 && j == size-1) {
-
-				Particle* newP = new Particle(i + xOffset, j + yOffset, 1.0f);
+				Particle* newP = new Particle(i + xOffset, j + yOffset, 0);
 				newP->fixed = true;
 				Particles.push_back(newP);
 
@@ -99,6 +93,11 @@ void ParticleSystem::InitializeCloth(unsigned int size, float xOffset, float yOf
 		}
 
 	}
+
+	//little offset to keep it from staying flat
+	glm::vec3 initialOffset = { 0,0,1 };
+	Particles[0]->Position = Particles[0]->Position + initialOffset;
+	Particles[0]->ogPosition = Particles[0]->Position;
 
 	std::cerr << "NumSD: " << SpringDampers.size() << std::endl;
 

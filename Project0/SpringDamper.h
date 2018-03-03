@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "Particle.h"
+#include <iostream>
 
 class SpringDamper
 {
@@ -14,9 +15,9 @@ public:
 	void ComputeForce();
 
 	//Spring Constant
-	float Ks = 0.0f;
+	float Ks;
 	//Damping Factor
-	float Kd = 0.0f;
+	float Kd;
 	//Rest Length
 	float L0;
 
