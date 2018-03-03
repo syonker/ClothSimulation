@@ -66,6 +66,12 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 	Cam=new Camera;
 	Cam->SetAspect(float(WinX)/float(WinY));
 
+	testP = new Particle(0, 0, 0);
+
+	cloth = new ParticleSystem();
+	cloth->InitializeCloth(10);
+
+	player = new Player(cloth, 0, 0.0001, 100);
 	
 
 }
@@ -86,7 +92,7 @@ void Tester::Update() {
 	// Update the components in the world
 	Cam->Update();
 
-
+	player->Update();
 
 	// Tell glut to re-display the scene
 	glutSetWindow(WindowHandle);
@@ -107,6 +113,8 @@ void Tester::Draw() {
 	glViewport(0, 0, WinX, WinY);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	//testP->Draw(Cam->GetViewProjectMtx(), Program->GetProgramID());
+	cloth->Draw(Cam->GetViewProjectMtx(), Program->GetProgramID());
 
 	// Finish drawing scene
 	glFinish();
@@ -138,6 +146,13 @@ void Tester::Keyboard(int key,int x,int y) {
 			break;
 		case 'r':
 			Reset();
+			player->Reset();
+			break;
+		case 'o':
+			player->SetActive(true);
+			break;
+		case 'p':
+			player->SetActive(false);
 			break;
 	}
 }

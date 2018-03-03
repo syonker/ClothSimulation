@@ -1,31 +1,26 @@
 #pragma once
 
 #include "Core.h"
-#include "Tokenizer.h"
-#include <iostream>
-#include "Animation.h"
-#include "Skeleton.h"
+#include "ParticleSystem.h"
 
 class Player
 {
 
 public:
 
-	Player(Animation* newAnimation, Skeleton* newSkeleton);
+	Player(ParticleSystem* system, float tstart, float inc, float tend);
 	~Player();
-	void Evaluate();
-	void PoseSkel();
 
-	Animation* animation;
-	Skeleton* skeleton;
+	void Update();
+	void Reset();
+	void SetActive(bool toggle);
 
-	std::vector<float> pose;
-	float t;
-	float tStart, tEnd;
-	float tInc;
-
-	glm::mat4 rootTranslate;
-
-private:
+	ParticleSystem* System;
+	float time;
+	float tStart;
+	float tEnd;
+	float increment;
+	bool active;
 
 };
+

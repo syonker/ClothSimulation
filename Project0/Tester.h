@@ -6,16 +6,9 @@
 
 #include "Shader.h"
 #include "Camera.h"
-#include "SpinningCube.h"
-#include "Skeleton.h"
-#include "Joint.h"
-#include "DOF.h"
-#include "Skin.h"
-#include "Vertex.h"
-#include "Rig.h"
-#include "Animation.h"
-#include "Channel.h"
-#include "Keyframe.h"
+#include "Triangle.h"
+#include "Particle.h"
+#include "ParticleSystem.h"
 #include "Player.h"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -54,9 +47,9 @@ private:
 	ShaderProgram *Program;
 	Camera *Cam;
 
-	Rig* currRig;
-	Animation* currAnimation;
-	Player* currPlayer;
+	Player* player;
+	Particle* testP;
+	ParticleSystem* cloth;
 
 	bool drawSkel;
 	bool drawSkin;

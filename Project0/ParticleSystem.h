@@ -12,10 +12,10 @@ public:
 
 	void InitializeCloth(unsigned int size);
 	void Update(float deltaTime);
-	void Draw();
+	void Draw(const glm::mat4 &viewProjMtx, uint shader);
+	void ResetParticles();
 
 	unsigned int NumParticles;
-	
 	std::vector<Particle*> Particles;
 
 private:

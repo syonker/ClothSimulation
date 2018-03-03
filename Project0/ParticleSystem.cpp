@@ -15,6 +15,18 @@ ParticleSystem::~ParticleSystem()
 
 void ParticleSystem::InitializeCloth(unsigned int size) {
 
+	for (int i = 0; i < size; i++) {
+
+		for (int j = 0; j < size; j++) {
+
+			Particle* newP = new Particle(i - 5,j + 20,0);
+			Particles.push_back(newP);
+
+		}
+
+	}
+
+	NumParticles = size * size;
 
 }
 
@@ -42,7 +54,22 @@ void ParticleSystem::Update(float deltaTime) {
 
 }
 
-void ParticleSystem::Draw() {
+void ParticleSystem::Draw(const glm::mat4 &viewProjMtx, uint shader) {
 
+	for (int i = 0; i < NumParticles; i++) {
+
+		Particles[i]->Draw(viewProjMtx, shader);
+
+	}
+
+}
+
+void ParticleSystem::ResetParticles() {
+
+	for (int i = 0; i < NumParticles; i++) {
+
+		Particles[i]->Reset();
+
+	}
 
 }
