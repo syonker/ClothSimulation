@@ -9,9 +9,10 @@ SpringDamper::SpringDamper(Particle* p1, Particle* p2)
 
 	L0 = glm::distance(P2->Position, P1->Position);
 
-	Ks = 300.0f;
-	Kd = 10.0f;
-
+	//300 and 10 also works
+	Ks = 500.0f;
+	Kd = 20.0f;
+	
 }
 
 

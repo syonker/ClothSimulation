@@ -17,6 +17,7 @@ public:
 
 	Model* model;
 	float Mass;
+	glm::vec3 Normal;
 	glm::vec3 Position;
 	glm::vec3 Velocity;
 	glm::vec3 Force;

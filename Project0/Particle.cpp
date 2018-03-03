@@ -9,6 +9,8 @@ Particle::Particle(float x, float y, float z) {
 	Force = { 0,0,0 };
 	Mass = 1.0f;
 
+	Normal = { 0,0,0 };
+
 	model = new Model();
 	offset = {0.1f,0.1f,0.1f};
 	model->MakeBox(Position - offset, Position + offset);

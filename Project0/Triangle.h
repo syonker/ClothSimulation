@@ -11,6 +11,8 @@ public:
 	Triangle(Particle* p1, Particle* p2, Particle* p3);
 	~Triangle();
 
+	void UpdateNormal();
+
 	Particle* P1;
 	Particle* P2;
 	Particle* P3;
