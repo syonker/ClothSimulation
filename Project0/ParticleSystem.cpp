@@ -95,7 +95,7 @@ void ParticleSystem::InitializeCloth(unsigned int size, float xOffset, float yOf
 	}
 
 	//little offset to keep it from staying flat
-	glm::vec3 initialOffset = { 0,0,1 };
+	glm::vec3 initialOffset = { 0,0,-0.0000001f };
 	Particles[0]->Position = Particles[0]->Position + initialOffset;
 	Particles[0]->ogPosition = Particles[0]->Position;
 
@@ -156,7 +156,9 @@ void ParticleSystem::Update(float deltaTime) {
 
 	}
 
+	//Sparkly if include this
 	UpdateNormals();
+
 	UpdateShaderArrays();
 
 }
@@ -335,5 +337,28 @@ void ParticleSystem::ToggleParticleView() {
 	else {
 		particleView = true;
 	}
+
+}
+
+void ParticleSystem::ChangeAir(bool up) {
+
+	float increment;
+	glm::vec3 inc;
+
+	if (!up) {
+		increment = 1.0f;
+	}
+	else {
+		increment = -1.0f;
+	}
+
+	inc = { 0.0f,0.0f,increment };
+
+	for (int i = 0; i < Triangles.size(); i++) {
+
+		Triangles[i]->vAir += inc;
+
+	}
+
 
 }

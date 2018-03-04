@@ -21,6 +21,7 @@ public:
 	void BindShader();
 	void UpdateShaderArrays();
 	void ToggleParticleView();
+	void ChangeAir(bool up);
 
 	unsigned int NumParticles;
 	std::vector<Particle*> Particles;

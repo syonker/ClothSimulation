@@ -67,7 +67,7 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 	Cam->SetAspect(float(WinX)/float(WinY));
 
 	cloth = new ParticleSystem();
-	cloth->InitializeCloth(20, -10.0f, 5.0f);
+	cloth->InitializeCloth(20, -10.0f, 0.0f);
 	//cloth->InitializeCloth(3, -1.5f, 0.0f);
 
 	player = new Player(cloth, 0.0f, 0.01f, 100.0f);
@@ -155,6 +155,12 @@ void Tester::Keyboard(int key,int x,int y) {
 			break;
 		case 's':
 			cloth->ToggleParticleView();
+			break;
+		case 'u':
+			cloth->ChangeAir(true);
+			break;
+		case 'd':
+			cloth->ChangeAir(false);
 			break;
 	}
 }

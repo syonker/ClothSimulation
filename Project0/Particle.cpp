@@ -40,7 +40,7 @@ void Particle::Update(float deltaTime) {
 
 
 		//Cheezy collision
-		if (Position.y < 0.0f) {
+		if (Position.y < -3.0f) {
 
 			Position.y = 2.0f*0.0f - Position.y;
 			Velocity.y = -0.5f*Velocity.y;

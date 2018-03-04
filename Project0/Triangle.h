@@ -19,6 +19,7 @@ public:
 	Particle* P3;
 
 	glm::vec3 Normal;
+	glm::vec3 vAir;
 
 private:
 
