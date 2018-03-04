@@ -22,6 +22,13 @@ public:
 	void UpdateShaderArrays();
 	void ToggleParticleView();
 	void ChangeAir(bool up);
+	void Up();
+	void Down();
+	void Left();
+	void Right();
+	void Forward();
+	void Back();
+	void Transform(glm::mat4 T);
 
 	unsigned int NumParticles;
 	std::vector<Particle*> Particles;

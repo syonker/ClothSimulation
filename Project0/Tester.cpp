@@ -71,6 +71,8 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 	//cloth->InitializeCloth(3, -1.5f, 0.0f);
 
 	player = new Player(cloth, 0.0f, 0.01f, 100.0f);
+
+	moveCam = true;
 	
 
 }
@@ -153,14 +155,40 @@ void Tester::Keyboard(int key,int x,int y) {
 		case 'p':
 			player->SetActive(false);
 			break;
-		case 's':
+		case 'v':
 			cloth->ToggleParticleView();
 			break;
 		case 'u':
 			cloth->ChangeAir(true);
 			break;
-		case 'd':
+		case 'j':
 			cloth->ChangeAir(false);
+			break;
+		case 'm':
+			if (moveCam) {
+				moveCam = false;
+			}
+			else {
+				moveCam = true;
+			}
+			break;
+		case 'w':
+			cloth->Up();
+			break;
+		case 's':
+			cloth->Down();
+			break;
+		case 'a':
+			cloth->Left();
+			break;
+		case 'd':
+			cloth->Right();
+			break;
+		case 'q':
+			cloth->Forward();
+			break;
+		case 'e':
+			cloth->Back();
 			break;
 	}
 }
@@ -192,9 +220,21 @@ void Tester::MouseMotion(int nx,int ny) {
 	// Move camera
 	// NOTE: this should really be part of Camera::Update()
 	if(LeftDown) {
-		const float rate=1.0f;
-		Cam->SetAzimuth(Cam->GetAzimuth()+dx*rate);
-		Cam->SetIncline(glm::clamp(Cam->GetIncline()-dy*rate,-90.0f,90.0f));
+
+		if (moveCam) {
+
+			const float rate = 1.0f;
+			Cam->SetAzimuth(Cam->GetAzimuth() + dx * rate);
+			Cam->SetIncline(glm::clamp(Cam->GetIncline() - dy * rate, -90.0f, 90.0f));
+
+		}
+		else {
+
+			
+
+				 
+			
+		}
 	}
 	if(RightDown) {
 		const float rate=0.005f;

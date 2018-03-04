@@ -51,8 +51,7 @@ private:
 	Player* player;
 	ParticleSystem* cloth;
 
-	bool drawSkel;
-	bool drawSkin;
+	bool moveCam;
 
 };
 

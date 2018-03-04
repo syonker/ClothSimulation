@@ -362,3 +362,63 @@ void ParticleSystem::ChangeAir(bool up) {
 
 
 }
+
+
+void ParticleSystem::Up() {
+
+	glm::mat4 T = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.5f,0.0f));
+	Transform(T);
+
+}
+
+void ParticleSystem::Down() {
+
+	glm::mat4 T = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -0.5f, 0.0f));
+	Transform(T);
+
+}
+
+void ParticleSystem::Left() {
+
+	glm::mat4 T = glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, 0.0f, 0.0f));
+	Transform(T);
+}
+
+void ParticleSystem::Right() {
+
+	glm::mat4 T = glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, 0.0f, 0.0f));
+	Transform(T);
+
+}
+
+void ParticleSystem::Forward() {
+
+	glm::mat4 T = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.5f));
+	Transform(T);
+
+}
+
+void ParticleSystem::Back() {
+
+	glm::mat4 T = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -0.5f));
+	Transform(T);
+
+}
+
+void ParticleSystem::Transform(glm::mat4 T) {
+
+	glm::vec4 pos;
+
+	for (int i = 0; i < NumParticles; i++) {
+
+		if (Particles[i]->fixed) {
+
+			pos = { Particles[i]->Position, 1.0f };
+			pos = T * pos;
+			Particles[i]->Position = {pos.x,pos.y,pos.z};
+
+		}
+
+	}
+
+}
