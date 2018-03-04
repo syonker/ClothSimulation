@@ -50,8 +50,7 @@ private:
 
 	Player* player;
 	ParticleSystem* cloth;
-
-	bool moveCam;
+	Model* ground;
 
 };
 

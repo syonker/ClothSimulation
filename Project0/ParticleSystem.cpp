@@ -245,6 +245,9 @@ void ParticleSystem::ResetParticles() {
 
 	}
 
+	UpdateNormals();
+	UpdateShaderArrays();
+
 }
 
 void ParticleSystem::UpdateNormals() {
@@ -416,6 +419,8 @@ void ParticleSystem::Transform(glm::mat4 T) {
 			pos = { Particles[i]->Position, 1.0f };
 			pos = T * pos;
 			Particles[i]->Position = {pos.x,pos.y,pos.z};
+
+			Particles[i]->model->MakeBox((Particles[i]->Position - Particles[i]->offset), (Particles[i]->Position + Particles[i]->offset));
 
 		}
 

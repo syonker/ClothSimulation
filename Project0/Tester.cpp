@@ -72,7 +72,9 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 
 	player = new Player(cloth, 0.0f, 0.01f, 100.0f);
 
-	moveCam = true;
+	ground = new Model();
+	ground->MakeBox({ -100.0f,-30.0f,-100.0f }, { 100.0f,-3.2f,100.0f });
+	ground->ambient = {0.5,0.5,0.5};
 	
 
 }
@@ -116,6 +118,8 @@ void Tester::Draw() {
 
 	//testP->Draw(Cam->GetViewProjectMtx(), Program->GetProgramID());
 	cloth->Draw(Cam->GetViewProjectMtx(), Program->GetProgramID());
+
+	ground->Draw(glm::mat4(1.0f) , Cam->GetViewProjectMtx(), Program->GetProgramID());
 
 	// Finish drawing scene
 	glFinish();
@@ -163,14 +167,6 @@ void Tester::Keyboard(int key,int x,int y) {
 			break;
 		case 'j':
 			cloth->ChangeAir(false);
-			break;
-		case 'm':
-			if (moveCam) {
-				moveCam = false;
-			}
-			else {
-				moveCam = true;
-			}
 			break;
 		case 'w':
 			cloth->Up();
@@ -221,20 +217,10 @@ void Tester::MouseMotion(int nx,int ny) {
 	// NOTE: this should really be part of Camera::Update()
 	if(LeftDown) {
 
-		if (moveCam) {
+		const float rate = 1.0f;
+		Cam->SetAzimuth(Cam->GetAzimuth() + dx * rate);
+		Cam->SetIncline(glm::clamp(Cam->GetIncline() - dy * rate, -90.0f, 90.0f));
 
-			const float rate = 1.0f;
-			Cam->SetAzimuth(Cam->GetAzimuth() + dx * rate);
-			Cam->SetIncline(glm::clamp(Cam->GetIncline() - dy * rate, -90.0f, 90.0f));
-
-		}
-		else {
-
-			
-
-				 
-			
-		}
 	}
 	if(RightDown) {
 		const float rate=0.005f;
