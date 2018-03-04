@@ -186,6 +186,12 @@ void Tester::Keyboard(int key,int x,int y) {
 		case 'e':
 			cloth->Back();
 			break;
+		case 'c':
+			cloth->RotateC();
+			break;
+		case 'z':
+			cloth->RotateCC();
+			break;
 	}
 }
 

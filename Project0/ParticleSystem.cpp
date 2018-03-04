@@ -408,6 +408,20 @@ void ParticleSystem::Back() {
 
 }
 
+void ParticleSystem::RotateC() {
+
+	glm::mat4 T = glm::rotate(glm::mat4(1.0f), 0.1f,  glm::vec3(0.0f, 1.0f, 0.0f));
+	Transform(T);
+
+}
+
+void ParticleSystem::RotateCC() {
+
+	glm::mat4 T = glm::rotate(glm::mat4(1.0f), -0.1f, glm::vec3(0.0f, 1.0f, 0.0f));
+	Transform(T);
+
+}
+
 void ParticleSystem::Transform(glm::mat4 T) {
 
 	glm::vec4 pos;

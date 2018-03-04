@@ -28,6 +28,8 @@ public:
 	void Right();
 	void Forward();
 	void Back();
+	void RotateC();
+	void RotateCC();
 	void Transform(glm::mat4 T);
 
 	unsigned int NumParticles;
