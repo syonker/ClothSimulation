@@ -38,7 +38,6 @@ void Particle::Update(float deltaTime) {
 		Velocity += acc * deltaTime;
 		Position += Velocity * deltaTime;
 
-
 		//Cheezy collision
 		if (Position.y < -3.0f) {
 
@@ -47,7 +46,6 @@ void Particle::Update(float deltaTime) {
 			Velocity.x = (1 - 0.1f)*Velocity.x;
 			Velocity.z = (1 - 0.1f)*Velocity.z;
 		}
-
 
 		//Use position to update models position
 		model->MakeBox(Position - offset, Position + offset);

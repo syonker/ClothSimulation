@@ -28,7 +28,6 @@ void Triangle::UpdateNormal() {
 
 void Triangle::AerodynamicForce() {
 
-	//glm::vec3 vAir = {0.0f,0.0f,-10.0f};
 	float density = 1.0f;
 	float drag = 0.5f;
 
@@ -41,7 +40,6 @@ void Triangle::AerodynamicForce() {
 
 	float area = (0.5f)*(glm::length(temp));
 	area = area * glm::dot(glm::normalize(Veloctiy),Normal);
-	//area = area * (glm::dot(Veloctiy, Normal) / Veloctiy.length);
 
 	glm::vec3 force = (-0.5f) * density * ((glm::length(Veloctiy))*(glm::length(Veloctiy))) * drag * area * Normal;
 	

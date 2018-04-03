@@ -68,7 +68,6 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 
 	cloth = new ParticleSystem();
 	cloth->InitializeCloth(20, -10.0f, 0.0f);
-	//cloth->InitializeCloth(3, -1.5f, 0.0f);
 
 	player = new Player(cloth, 0.0f, 0.01f, 100.0f);
 
@@ -76,7 +75,6 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 	ground->MakeBox({ -100.0f,-30.0f,-100.0f }, { 100.0f,-3.2f,100.0f });
 	ground->ambient = {0.5,0.5,0.5};
 	
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -116,9 +114,7 @@ void Tester::Draw() {
 	glViewport(0, 0, WinX, WinY);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//testP->Draw(Cam->GetViewProjectMtx(), Program->GetProgramID());
 	cloth->Draw(Cam->GetViewProjectMtx(), Program->GetProgramID());
-
 	ground->Draw(glm::mat4(1.0f) , Cam->GetViewProjectMtx(), Program->GetProgramID());
 
 	// Finish drawing scene
